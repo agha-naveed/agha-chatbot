@@ -16,6 +16,5 @@ Welcome to Agha Chatbot! This AI-powered chatbot is designed to provide intellig
 
 We welcome contributions to enhance Agha Chatbot. To contribute, please Fork the repository.
 
-### Contact
-For any questions or support, please contact us at naveedabs31@gmail.com.
-
+## Contact
+For any questions or support, please contact us at naveedabs31@gmail.com
