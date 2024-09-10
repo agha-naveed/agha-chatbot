@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import Homepage from './components/Homepage'
 import ContextProvider from './context/Context'
-import VoiceToText from './VoiceToText'
-import App from './App'
 
 // import
 
@@ -14,7 +12,5 @@ createRoot(document.getElementById('root')).render(
         
         <Homepage />
       </ContextProvider>
-      <VoiceToText />
-      {/* <App /> */}
   </StrictMode>,
 )

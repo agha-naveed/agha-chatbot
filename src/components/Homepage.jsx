@@ -3,7 +3,6 @@ import DOMPurify from 'dompurify';
 import "@fontsource/poppins"
 import logo from '../assets/my-logo.webp'
 import { IoSearch, IoSettings, IoCloseOutline, IoAdd } from "react-icons/io5";
-import { FaMicrophone } from "react-icons/fa";
 import { FiMessageSquare } from "react-icons/fi";
 import { CgMenuLeft } from "react-icons/cg";
 import { Context } from '../context/Context';
@@ -11,7 +10,7 @@ import { Context } from '../context/Context';
 export default function Homepage() {
     let [sidebar, setSidebar] = useState(false)
     let ref = useRef()
-    
+
     const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat} = useContext(Context)
 
     const loadPrompt = async (prompt) => {
@@ -29,8 +28,6 @@ export default function Homepage() {
     const getSearchData = (e) => {
         setInput(e.target.value)
     }
-
-
 
 
 
@@ -59,6 +56,7 @@ export default function Homepage() {
       };
       
       const sanitizedHTML = renderContent(resultData);
+
 
 
     return (
@@ -127,12 +125,12 @@ export default function Homepage() {
                 </div>
 
                 <div className="search-bar w-full grid">
-                    <div className='w-full flex'>
+                    <div className='w-full flex text-black'>
 
+                        
                         <input type="text" ref={ref} placeholder='Enter Prompt...' className='w-full h-12 text-black border-none outline-none rounded-l-3xl pl-6 pr-1' onChange={getSearchData} value={input} onKeyDown={pressEnter} />
-                        <button className="search-icon bg-white h-auto px-[7px]">
-                            <FaMicrophone className='w-[40px] h-[40px] p-[7px] text-2xl text-white rounded-full bg-slate-800' />
-                        </button>
+                        
+                        
                         <button onClick={() => {input && onSent()}} className="search-icon bg-white rounded-r-3xl h-auto px-[7px]">
                             <IoSearch className='w-[40px] h-[40px] p-[7px] text-2xl text-white rounded-full bg-slate-800' />
                         </button>
