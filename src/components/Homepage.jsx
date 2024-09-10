@@ -11,7 +11,7 @@ export default function Homepage() {
     let [sidebar, setSidebar] = useState(false)
     let ref = useRef()
     
-    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat, detail} = useContext(Context)
+    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat} = useContext(Context)
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt)
@@ -35,7 +35,6 @@ export default function Homepage() {
 
 
     const wrapCodeBlocks = (content) => {
-        // Regular expression to find content between triple backticks
         content = content.replace(/```(.*?)```/gs, (match, code) => {
           return `<pre><code>${escapeHTML(code)}</code></pre>`;
         });
@@ -48,14 +47,12 @@ export default function Homepage() {
       };
       
       const escapeHTML = (html) => {
-        // Escaping HTML to ensure code tags display correctly
         return html.replace(/&/g, "&amp;")
                    .replace(/</g, "&lt;")
                    .replace(/>/g, "&gt;");
       };
       
       const renderContent = (content) => {
-        // Wrap code blocks and sanitize the entire content
         const wrappedContent = wrapCodeBlocks(content);
         return DOMPurify.sanitize(wrappedContent);
       };
@@ -88,13 +85,13 @@ export default function Homepage() {
             <div className="bg-clr md:hidden block">
             </div>
 
-            <div className="md:container w-[100%] z-50 mx-auto md:max-w-3xl h-full flex flex-col items-center justify-between">
+            <div className="md:container w-[100%] z-50 mx-auto md:max-w-3xl sm:h-full h-[90vh] flex flex-col items-center justify-between">
                 
                 <div className="output w-full h-full content-end min-h-auto pb-12">
                     {
                         !showResult ?
                         <div className="placeholder px-12 py-8 my-20">
-                            <img src={logo} alt="Agha Naveed Logo" className='w-[50px] h-[50px] block lg:hidden absolute top-[50%] left-[50%] opacity-30' />
+                            <img src={logo} alt="Agha Naveed Logo" className='w-[50px] h-[50px] block lg:hidden absolute top-[30%] left-[50%] opacity-30' />
                             <h1 className='p-holder-heading text-6xl font-bold'>Hello, Dev.</h1>
                             <h2 className='p-holder-heading text-4xl'>How Can I Assist You?</h2>
                         </div>
