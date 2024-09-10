@@ -60,12 +60,6 @@ export default function Homepage() {
       const sanitizedHTML = renderContent(resultData);
 
 
-  // Optionally, you can trigger the scroll automatically when content updates or other actions happen
-  useEffect(() => {
-    scrollToInput();
-  }, []); // You can add dependencies to trigger scrolling when those change
-
-
     return (
         <div className='w-full min-h-screen dark:bg-slate-800 dark:text-white text-black grid items-center p-5 font-poppins'>
             <nav className='flex justify-between place-self-start w-full h-[60px] items-center p-5 z-50'>
