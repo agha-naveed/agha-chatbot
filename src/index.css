@@ -141,7 +141,9 @@ body {
     white-space: pre-wrap;
     width: 100%;
 }
-
+.result-data p::-webkit-scrollbar {
+    display: none;
+}
 
 .code-frame {
     background-color: black;
