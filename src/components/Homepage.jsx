@@ -60,7 +60,7 @@ export default function Homepage() {
 
 
     return (
-        <div className='w-full min-h-screen dark:bg-slate-800 dark:text-white text-black grid items-center p-5 font-poppins'>
+        <div className='w-full min-h-screen bg-slate-800 text-white grid items-center p-5 font-poppins'>
             <nav className='flex justify-between place-self-start w-full h-[60px] items-center p-5 z-50'>
                 
                 <button onClick={() => {setSidebar(!sidebar)}} className="setting-btn flex lg:hidden text-[26px] font-bold text-white  rounded-full p-2">
@@ -69,8 +69,8 @@ export default function Homepage() {
 
                 <img src={logo} alt="Agha Naveed Logo" className='w-[50px] h-[50px] lg:block hidden' />
                 <div className='space-x-2'>
-                    <a href='#' className='dark:bg-white bg-slate-800 py-[5px] px-[13px] rounded-[24px] text-sm font-bold items-center justify-center dark:text-slate-800 text-white'>Log in</a>
-                    <a href='#' className='outline outline-1 dark:outline-slate-500 outline-slate-800 py-[5px] px-[13px] rounded-[24px] text-sm  items-center justify-center text-slate-800 dark:text-white'>Sign up</a>
+                    <a href='#' className='bg-white py-[5px] px-[13px] rounded-[24px] text-sm font-bold items-center justify-center text-slate-800'>Log in</a>
+                    <a href='#' className='outline outline-1 outline-slate-500 py-[5px] px-[13px] rounded-[24px] text-sm  items-center justify-center text-white'>Sign up</a>
                 </div>
             </nav>
             
@@ -86,7 +86,7 @@ export default function Homepage() {
 
             <div className="md:container w-[100%] z-50 mx-auto md:max-w-3xl sm:h-full h-[90vh] flex flex-col items-center justify-between">
                 
-                <div className="output w-full h-full content-end min-h-auto pb-12">
+                <div className="output w-full h-full content-end min-h-auto pb-[20px]">
                     {
                         !showResult ?
                         <div className="placeholder px-12 py-8 my-20">
