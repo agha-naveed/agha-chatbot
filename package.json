@@ -6,7 +6,7 @@
   "author": {
     "name": "Agha Naveed",
     "email": "naveedabs31@gmail.com",
-    "portfolio": "agha-naveed.github.io/portfolio"
+    "portfolio": "https://agha-naveed.vercel.app"
   },
   "scripts": {
     "dev": "vite",
@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@fontsource/poppins": "^5.0.15",
-    "@google/generative-ai": "^0.17.1",
     "dompurify": "^3.1.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
