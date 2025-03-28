@@ -1,4 +1,3 @@
-import ('dotenv').config();
 const run = async(prompt) => {
   const url = 'https://chatgpt-42.p.rapidapi.com/deepseekai';
   const options = {
