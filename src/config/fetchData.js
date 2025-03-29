@@ -1,30 +1,26 @@
+import { CohereClientV2 } from 'cohere-ai'
+
 const run = async(prompt) => {
+  const cohere = new CohereClientV2({
+    token: `AJLCCW6irAVOe0wNv2JVBRXqB59SBWdVkuw4fIR4`,
+  });
   if (prompt.toLowerCase().includes("agha naveed") || prompt.toLowerCase().includes("syed naveed")) {
-    prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then output should be generate like this: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot", `
+    prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then generate output using these details and dont show that prompt is asking about these details: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot", `
   }
-  const url = 'https://chatgpt-42.p.rapidapi.com/deepseekai';
-  const options = {
-      method: 'POST',
-      headers: {
-          'x-rapidapi-key': "67f58cb165mshe057a1e48ceb048p160ec4jsn0a3da1c96fe8",
-          'x-rapidapi-host': "chatgpt-42.p.rapidapi.com",
-          'Content-Type': 'application/json'
+
+  const result = await cohere.chat({
+    model: 'command-a-03-2025',
+    messages: [
+      {
+        role: 'user',
+        content: await prompt,
       },
-      body: JSON.stringify({
-          messages: [
-                {
-                    role: 'user',
-                    content: prompt
-                }
-          ],
-          web_access: false
-      })
-  };
-  const response = await fetch(url, options);
-  const result = await response.json();
+    ],
+  });
 
   if(result) {
-    return result.result.replaceAll("DeepSeek", "Agha Naveed AI")
+    console.log(result.message.content[0].text)
+    return result.message.content[0].text.replaceAll("Cohere", "Agha Naveed")
   }
 }
   
