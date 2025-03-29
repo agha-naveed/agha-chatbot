@@ -11,8 +11,6 @@ Welcome to Agha Chatbot! This AI-powered chatbot is designed to provide intellig
  - <b>React:</b> For building the user interface.
  - <b>Tailwind CSS:</b> For styling and creating a responsive design.
  - <b>Vite:</b> For fast and efficient bundling.
- - <b>Gemini API:</b> To generate intelligent responses based on user input.
-
 
 We welcome contributions to enhance Agha Chatbot. To contribute, please Fork the repository.
 
