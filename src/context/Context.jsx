@@ -3,7 +3,6 @@ import run from "../config/fetchData";
 
 export const Context = createContext();
 
-
 const ContextProvider = (props) => {
 
     const [input, setInput] = useState("")

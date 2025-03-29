@@ -1,4 +1,7 @@
 const run = async(prompt) => {
+  if (prompt.toLowerCase().includes("agha naveed") || prompt.toLowerCase().includes("syed naveed")) {
+    prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then output should be generate like this: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot", `
+  }
   const url = 'https://chatgpt-42.p.rapidapi.com/deepseekai';
   const options = {
       method: 'POST',
