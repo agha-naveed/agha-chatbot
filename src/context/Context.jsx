@@ -81,6 +81,7 @@ const ContextProvider = (props) => {
         resultData,
         input,
         setInput,
+        setShowResult,
         newChat
     }
 
