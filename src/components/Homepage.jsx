@@ -57,14 +57,13 @@ export default function Homepage() {
                     const base64data = reader.result;
                     setImage(base64data);
                     console.log(base64data)
+                    console.log("Loading")
+                    setImgLoading(false);
                 };
                 reader.readAsDataURL(result);
             }
         } catch (error) {
             console.error("Error generating image:", error.message);
-        } finally {
-            console.log("Loading false")
-            setImgLoading(false);
         }
     }
 
@@ -132,7 +131,7 @@ export default function Homepage() {
                             <h2 className='p-holder-heading text-4xl'>How Can I Assist You?</h2>
                         </div>
                         
-                        : !image ?
+                        : imgLoading ?
                             <div className='result'>
                                 <div className="result-title flex">
                                     <p className='w-full flex place-content-end'>
@@ -169,7 +168,7 @@ export default function Homepage() {
                                 <img src={logo} className='w-10' alt="Agha-Chatbot Logo" />
                                 {
                                     imgLoading ? 
-                                    <div className='loader'>
+                                    <div className='loader text-white'>
                                         Generating...
                                     </div>
                                     :
