@@ -7,6 +7,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { CgMenuLeft } from "react-icons/cg";
 import { Context } from '../context/Context';
 import { FaImage } from "react-icons/fa6";
+import axios from 'axios'
 
 export default function Homepage() {
     let [sidebar, setSidebar] = useState(false)
@@ -31,6 +32,39 @@ export default function Homepage() {
     }
 
 
+    // Image Generate
+    const imageFunction = async () => {
+        const prompt = input
+        const payload = {
+            prompt,
+            output_format: "webp"
+        };
+    
+        try {
+            const response = await axios.postForm(
+                `https://api.stability.ai/v2beta/stable-image/generate/ultra`,
+                axios.toFormData(payload, new FormData()),
+                {
+                    validateStatus: undefined,
+                    responseType: "arraybuffer",
+                    headers: {
+                        Authorization: `sk-6nFtBmsAZyNwCkIObBTRKOmkhR7lBGd6EHyZ9JPzUuyf1FNp`,
+                        Accept: "image/*"
+                    },
+                }
+            );
+        
+            if (response.status === 200) {
+                const base64Image = Buffer.from(response.data).toString("base64");
+                res.json({ image: `data:image/webp;base64,${base64Image}` });
+            } else {
+                res.status(response.status).send(response.data.toString());
+            }
+            } catch (error) {
+            console.error("Error generating image:", error.message);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
 
 
     const wrapCodeBlocks = (content) => {
@@ -132,7 +166,7 @@ export default function Homepage() {
                         <input type="text" ref={ref} placeholder='Enter Prompt...' className='w-full h-12 text-black border-none outline-none rounded-l-3xl pl-6 pr-1' onChange={getSearchData} value={input} onKeyDown={pressEnter} />
                         
                         
-                        <button title='Generate an Image' onClick={() => {input && onSent()}} className="bg-white h-auto px-[7px]">
+                        <button title='Generate an Image' onClick={() => {imageFunction()}} className="bg-white h-auto px-[7px]">
                             <FaImage className='w-[40px] h-[40px] p-[7px] text-2xl text-slate-800' />
                         </button>
                         
