@@ -6,6 +6,7 @@ import { IoSearch, IoSettings, IoCloseOutline, IoAdd } from "react-icons/io5";
 import { FiMessageSquare } from "react-icons/fi";
 import { CgMenuLeft } from "react-icons/cg";
 import { Context } from '../context/Context';
+import { FaImage } from "react-icons/fa6";
 
 export default function Homepage() {
     let [sidebar, setSidebar] = useState(false)
@@ -131,9 +132,14 @@ export default function Homepage() {
                         <input type="text" ref={ref} placeholder='Enter Prompt...' className='w-full h-12 text-black border-none outline-none rounded-l-3xl pl-6 pr-1' onChange={getSearchData} value={input} onKeyDown={pressEnter} />
                         
                         
-                        <button onClick={() => {input && onSent()}} className="search-icon bg-white rounded-r-3xl h-auto px-[7px]">
+                        <button title='Generate an Image' onClick={() => {input && onSent()}} className="bg-white h-auto px-[7px]">
+                            <FaImage className='w-[40px] h-[40px] p-[7px] text-2xl text-slate-800' />
+                        </button>
+                        
+                        <button title='Search Text...' onClick={() => {input && onSent()}} className="search-icon bg-white rounded-r-3xl h-auto px-[7px]">
                             <IoSearch className='w-[40px] h-[40px] p-[7px] text-2xl text-white rounded-full bg-slate-800' />
                         </button>
+
                     </div>
                     <p className='text-center text-sm mt-2'>All rights reserved with AghaNaveed ©</p>
                 </div>
