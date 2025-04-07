@@ -7,9 +7,9 @@ import { FiMessageSquare } from "react-icons/fi";
 import { CgMenuLeft } from "react-icons/cg";
 import { Context } from '../context/Context';
 import { FaImage } from "react-icons/fa6";
-import axios from 'axios'
 
 export default function Homepage() {
+    const apiKey = import.meta.env.VITE_HF_API_KEY;
     let [sidebar, setSidebar] = useState(false)
     let ref = useRef()
     const [image, setImage] = useState(null);
@@ -32,7 +32,7 @@ export default function Homepage() {
     const getSearchData = (e) => {
         setInput(e.target.value)
     }
-// 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
+    
     // Image Generate
     const imageFunction = async () => {
         setImgLoading(true)
@@ -40,22 +40,25 @@ export default function Homepage() {
         setImage(null)
     
         try {
-            const response = await fetch("https://router.huggingface.co/together/v1/images/generations",
+            const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
                 {
                     headers: {
-                        // Authorization: "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxx",
-                        Authorization: "Bearer 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",
+                        Authorization: `Bearer ${apiKey}`,
                         "Content-Type": "application/json",
                     },
                     method: "POST",
-                    body: JSON.stringify(input),
+                    body: JSON.stringify({inputs: input}),
                 }
             );
             const result = await response.blob();
-            console.log(result)
-            if(result) {
-                const imageUrl = URL.createObjectURL(result);
-                setImage(imageUrl)
+            if (result) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    setImage(base64data);
+                    console.log(base64data)
+                };
+                reader.readAsDataURL(result);
             }
         } catch (error) {
             console.error("Error generating image:", error.message);
@@ -158,7 +161,7 @@ export default function Homepage() {
                             <div className="result-title flex">
                                 <p className='w-full flex place-content-end'>
                                     <span className='bg-slate-600 px-5 py-3 rounded-[28px]' title={recentPrompt}>
-                                        {recentPrompt}
+                                        {input}
                                     </span>
                                 </p>
                             </div>
@@ -170,7 +173,7 @@ export default function Homepage() {
                                         Generating...
                                     </div>
                                     :
-                                    <div className='w-52'>
+                                    <div className='w-full'>
                                         <img src={image} alt="" />
                                     </div>
                                 }
