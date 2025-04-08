@@ -9,11 +9,9 @@ import { Context } from '../context/Context';
 import { FaImage } from "react-icons/fa6";
 
 export default function Homepage() {
-    const apiKey = import.meta.env.VITE_HF_API_KEY;
     let [sidebar, setSidebar] = useState(false)
     let ref = useRef()
-    // const [image, setImage] = useState(null);
-    const [imgLoading, setImgLoading] = useState(false);
+    // const [imgLoading, setImgLoading] = useState(false);
 
     const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat, image, isImage} = useContext(Context)
 

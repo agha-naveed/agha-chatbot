@@ -46,9 +46,14 @@ const ContextProvider = (props) => {
             response = await run(input)
         }
         if(response.message || response.message == 'image') {
-
+            setIsImage(true)
+            setImage(response.base64data)
+            
+            setLoading(false)
+            setInput("")
         }
         else {
+            setIsImage(false)
             let responseArray = response.split("**")
             let newResponse = "";
             for(let i = 0; i < responseArray.length; i++) {

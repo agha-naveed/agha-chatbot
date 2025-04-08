@@ -1,8 +1,10 @@
 import { CohereClientV2 } from 'cohere-ai'
 
 const API_URL = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_HF_API_KEY;
 const run = async(prompt) => {
   console.log("prompt: "+prompt)
+  
 
   if(String(prompt).substring(0, 9) == "/generate") {
     console.log("sahi he")
@@ -14,7 +16,7 @@ const run = async(prompt) => {
                     "Content-Type": "application/json",
                 },
                 method: "POST",
-                body: JSON.stringify({inputs: input}),
+                body: JSON.stringify({inputs: prompt}),
             }
         );
         const result = await response.blob();
