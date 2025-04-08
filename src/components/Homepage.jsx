@@ -12,10 +12,10 @@ export default function Homepage() {
     const apiKey = import.meta.env.VITE_HF_API_KEY;
     let [sidebar, setSidebar] = useState(false)
     let ref = useRef()
-    const [image, setImage] = useState(null);
+    // const [image, setImage] = useState(null);
     const [imgLoading, setImgLoading] = useState(false);
 
-    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat, setShowResult} = useContext(Context)
+    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, prevPrompt, setRecentPrompt, newChat, setShowResult, image} = useContext(Context)
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt)
@@ -34,38 +34,36 @@ export default function Homepage() {
     }
     
     // Image Generate
-    const imageFunction = async () => {
-        setImgLoading(true)
-        setShowResult(true)
-        setImage(null)
+    // const imageFunction = async () => {
+    //     setImgLoading(true)
+    //     setShowResult(true)
+    //     setImage(null)
     
-        try {
-            const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
-                {
-                    headers: {
-                        Authorization: `Bearer ${apiKey}`,
-                        "Content-Type": "application/json",
-                    },
-                    method: "POST",
-                    body: JSON.stringify({inputs: input}),
-                }
-            );
-            const result = await response.blob();
-            if (result) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const base64data = reader.result;
-                    setImage(base64data);
-                    console.log(base64data)
-                    console.log("Loading")
-                    setImgLoading(false);
-                };
-                reader.readAsDataURL(result);
-            }
-        } catch (error) {
-            console.error("Error generating image:", error.message);
-        }
-    }
+    //     try {
+    //         const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${apiKey}`,
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 method: "POST",
+    //                 body: JSON.stringify({inputs: input}),
+    //             }
+    //         );
+    //         const result = await response.blob();
+    //         if (result) {
+    //             const reader = new FileReader();
+    //             reader.onloadend = () => {
+    //                 const base64data = reader.result;
+    //                 setImage(base64data);
+    //                 setImgLoading(false);
+    //             };
+    //             reader.readAsDataURL(result);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error generating image:", error.message);
+    //     }
+    // }
 
 
     const wrapCodeBlocks = (content) => {
@@ -130,7 +128,6 @@ export default function Homepage() {
                             <h1 className='p-holder-heading text-6xl font-bold'>Hello, Dev.</h1>
                             <h2 className='p-holder-heading text-4xl'>How Can I Assist You?</h2>
                         </div>
-                        
                         :
                         <div className='result'>
                             <div className="result-title flex">
@@ -152,11 +149,63 @@ export default function Homepage() {
                                 }
                                 
                                 
-                                
                             </div>
                         </div>
 
                     }
+
+
+
+{/* imgLoading ?
+                            <div className='result'>
+                                <div className="result-title flex">
+                                    <p className='w-full flex place-content-end'>
+                                        <span className='bg-slate-600 px-5 py-3 rounded-[28px]' title={recentPrompt}>
+                                            {recentPrompt}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div className="result-data sm:flex grid">
+                                    <img src={logo} className='w-10' alt="Agha-Chatbot Logo" />
+                                    {
+                                        loading ? 
+                                        <div className='loader'>
+                                            Loading...
+                                        </div>
+                                        :
+                                        <p className="result-text" dangerouslySetInnerHTML={{ __html: sanitizedHTML}} ></p>
+                                    }
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        :
+                        <div className='result'>
+                            <div className="result-title flex">
+                                <p className='w-full flex place-content-end'>
+                                    <span className='bg-slate-600 px-5 py-3 rounded-[28px]' title={recentPrompt}>
+                                        {input}
+                                    </span>
+                                </p>
+                            </div>
+                            <div className="result-data sm:flex grid">
+                                <img src={logo} className='w-10' alt="Agha-Chatbot Logo" />
+                                {
+                                    imgLoading ? 
+                                    <div className='loader text-white'>
+                                        Generating...
+                                    </div>
+                                    :
+                                    <div className='w-full'>
+                                        <img src={image} alt="" />
+                                    </div>
+                                }
+                            </div>
+                        </div> */}
+
+
+
                 </div>
 
                 <div className="search-bar w-full grid">
