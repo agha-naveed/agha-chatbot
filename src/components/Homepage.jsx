@@ -36,7 +36,11 @@ export default function Homepage() {
 
         content = content.replace(/`(.*?)`/g, (match, code) => {
             return `<code>${escapeHTML(code)}</code>`;
-          });
+        });
+
+        content = content.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (match, text, url) => {
+            return `<a href="${url}" target="_blank">${text}</a>`;
+        });
 
         return content
       };
