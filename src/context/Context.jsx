@@ -29,58 +29,26 @@ const ContextProvider = (props) => {
     const onSent = async (prompt) => {
         setResultData("")
         setLoading(true)
-        setIsImage(false)
         setShowResult(true)
 
         let response;
-
-        if(String(prompt).substring(0, 9) == "/generate") {
-
-            setPrevPrompt(prev => [...prev, input])
-            setRecentPrompt(input)
-
-            try {
-                const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${apiKey}`,
-                            "Content-Type": "application/json",
-                        },
-                        method: "POST",
-                        body: JSON.stringify({inputs: input}),
-                    }
-                );
-                const result = await response.blob();
-                if (result) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        const base64data = reader.result;
-                        setImage(base64data);
-                    };
-                    reader.readAsDataURL(result);
-                }
-            } catch (error) {
-                console.error("Error generating image:", error.message);
-            }            
-
-
-            setLoading(false)
+        
+        
+        setIsImage(false)
+        if(prompt !== undefined) {
+            response = await run(prompt)
+            setRecentPrompt(prompt)
         }
 
         else {
+            setPrevPrompt(prev => [...prev, input])
+            setRecentPrompt(input)
+            response = await run(input)
+        }
+        if(response.message || response.message == 'image') {
 
-            if(prompt !== undefined) {
-                response = await run(prompt)
-
-                setRecentPrompt(prompt)
-            }
-
-            else {
-                setPrevPrompt(prev => [...prev, input])
-                setRecentPrompt(input)
-                response = await run(input)
-            }
-            
+        }
+        else {
             let responseArray = response.split("**")
             let newResponse = "";
             for(let i = 0; i < responseArray.length; i++) {
@@ -105,6 +73,7 @@ const ContextProvider = (props) => {
             setLoading(false)
             setInput("")
         }
+        
     }
 
 
@@ -121,7 +90,8 @@ const ContextProvider = (props) => {
         setInput,
         setShowResult,
         newChat,
-        image
+        image,
+        isImage
     }
 
     return (
