@@ -47,7 +47,7 @@ const run = async(prompt) => {
       and If your generated response contains team member of this AI Model. then respond with following details: 'Agha Naveed is a CEO and a developer of Agha AI Chatbot'.
 
       
-      If input is about agha naveed/owner/developer/ceo website/portfolio link then give this link:
+      If input is asking about agha naveed/owner/developer/ceo website/portfolio link then give this link otherwise not:
       https://agha-naveed.vercel.app
       `
     }
