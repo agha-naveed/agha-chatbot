@@ -129,6 +129,9 @@ export default function Homepage() {
                         :
                         isImage ?
                             <div className='result'>
+                                {
+                                    console.log(isImage)
+                                }
                                 <div className="result-title flex">
                                     <p className='w-full flex place-content-end'>
                                         <span className='bg-slate-600 px-5 py-3 rounded-[28px]' title={recentPrompt}>

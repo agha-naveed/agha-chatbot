@@ -12,7 +12,6 @@ const ContextProvider = (props) => {
     const [loading, setLoading] = useState(false)
     const [resultData, setResultData] = useState("")
     const [image, setImage] = useState("")
-    const [isImage, setIsImage] = useState(false)
     
 
     function delayPara(index, nextWord) {
@@ -33,8 +32,7 @@ const ContextProvider = (props) => {
 
         let response;
         
-        
-        setIsImage(false)
+    
         if(prompt !== undefined) {
             response = await run(prompt)
             setRecentPrompt(prompt)
@@ -45,16 +43,16 @@ const ContextProvider = (props) => {
             setRecentPrompt(input)
             response = await run(input)
         }
-        if(response.message || response.message == 'image') {
-            setIsImage(true)
-            setImage(response.base64data)
+
+        if(response?.message == "image") {
+            setImage(await response.data)
             
             setLoading(false)
             setInput("")
         }
-        else {
-            setIsImage(false)
-            let responseArray = response.split("**")
+
+        if(response?.message == "text") {
+            let responseArray = await response.data.split("**")
             let newResponse = "";
             for(let i = 0; i < responseArray.length; i++) {
                 if(i == 0 || i % 2 !== 1) {
@@ -95,8 +93,7 @@ const ContextProvider = (props) => {
         setInput,
         setShowResult,
         newChat,
-        image,
-        isImage
+        image
     }
 
     return (

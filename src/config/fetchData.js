@@ -19,15 +19,21 @@ const run = async(prompt) => {
                 body: JSON.stringify({inputs: prompt}),
             }
         );
-        const result = await response.blob();
-        if (result) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64data = reader.result;
-                return {message: "image", base64data}
-            };
-            reader.readAsDataURL(result);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
         }
+      
+        const blob = await response.blob();
+      
+        // Convert blob to base64 using FileReader and a Promise
+        const base64Data = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+      
+      return { message: "image", data: base64Data };
     } catch (error) {
         console.error("Error generating image:", error.message);
     }            
@@ -53,7 +59,10 @@ const run = async(prompt) => {
     });
 
     if(result) {
-      return result.message.content[0].text.replaceAll("Cohere", "Agha Naveed")
+      return {
+        message: "text",
+        data: result.message.content[0].text.replaceAll("Cohere", "Agha Naveed")
+      }
     }
   }
 }
