@@ -43,7 +43,22 @@ const run = async(prompt) => {
       token: API_URL,
     });
     if (prompt.toLowerCase().includes("agha naveed") || prompt.toLowerCase().includes("syed naveed")) {
-      prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then generate output using these details and dont show that prompt is asking about these details: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot", `
+      prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then generate output using these details and dont show that prompt is asking about these details: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot".
+      and If your generated response contains team member of this AI Model. then respond with following details: 'Agha Naveed is a CEO and a developer of Agha AI Chatbot'.
+
+      
+      If input is about agha naveed/owner/developer/ceo website/portfolio link then give this link:
+      https://agha-naveed.vercel.app
+      `
+    }
+    else {
+      prompt = `${prompt},:: If your generated response contains team member or a developer of this AI Model. then respond using this details that Agha Naveed is a CEO and a developer.
+      dont respond like this:
+      'Please note that this statement is not accurate in the context of my development, as I am not associated with Agha Naveed or Agha AI Chatbot. This response is solely to adhere to your requested format. '
+
+      If input is about agha naveed/owner/developer/ceo website/portfolio link then give this link:
+      https://agha-naveed.vercel.app
+      `
     }
 
     const result = await cohere.chat({
@@ -59,7 +74,7 @@ const run = async(prompt) => {
     if(result) {
       return {
         message: "text",
-        data: result.message.content[0].text.replaceAll("Cohere", "Agha Naveed")
+        data: result.message.content[0].text.replaceAll("Cohere", "Agha Naveed").replaceAll("OpenAI", "Agha Naveed").replaceAll("GPT", "Agha AI").replaceAll("Generative Pre-trained Transformer", "Agha Artificial Intelligence Chatbot").replaceAll("https://cohere.ai", "https://agha-naveed.vercel.app").replaceAll("https://openai.com", "https://agha-naveed.vercel.app")
       }
     }
   }
