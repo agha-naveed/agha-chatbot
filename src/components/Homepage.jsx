@@ -127,7 +127,7 @@ export default function Homepage() {
                         !showResult ?
                         <div className="placeholder px-12 py-8 my-20">
                             <img src={logo} alt="Agha Naveed Logo" className='w-[50px] h-[50px] block lg:hidden absolute top-[30%] left-[50%] opacity-30' />
-                            <h1 className='p-holder-heading text-6xl font-bold'>Hello, Dev.</h1>
+                            <h1 className='p-holder-heading text-6xl font-bold'>Hello, Waqar Daghonipa</h1>
                             <h2 className='p-holder-heading text-4xl'>How Can I Assist You?</h2>
                         </div>
                         
