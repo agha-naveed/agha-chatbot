@@ -176,7 +176,6 @@ export default function Homepage() {
                                         <img src={image} alt="" />
                                     </div>
                                 }
-                                
                             </div>
                         </div>
 
