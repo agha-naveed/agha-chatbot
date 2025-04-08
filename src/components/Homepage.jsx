@@ -6,7 +6,6 @@ import { IoSearch, IoSettings, IoCloseOutline, IoAdd } from "react-icons/io5";
 import { FiMessageSquare } from "react-icons/fi";
 import { CgMenuLeft } from "react-icons/cg";
 import { Context } from '../context/Context';
-import { FaImage } from "react-icons/fa6";
 
 export default function Homepage() {
     let [sidebar, setSidebar] = useState(false)
@@ -25,44 +24,10 @@ export default function Homepage() {
             if(input)
                 onSent()
         }
-
     }
     const getSearchData = (e) => {
         setInput(e.target.value)
     }
-    
-    // Image Generate
-    // const imageFunction = async () => {
-    //     setImgLoading(true)
-    //     setShowResult(true)
-    //     setImage(null)
-    
-    //     try {
-    //         const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${apiKey}`,
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 method: "POST",
-    //                 body: JSON.stringify({inputs: input}),
-    //             }
-    //         );
-    //         const result = await response.blob();
-    //         if (result) {
-    //             const reader = new FileReader();
-    //             reader.onloadend = () => {
-    //                 const base64data = reader.result;
-    //                 setImage(base64data);
-    //                 setImgLoading(false);
-    //             };
-    //             reader.readAsDataURL(result);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error generating image:", error.message);
-    //     }
-    // }
-
 
     const wrapCodeBlocks = (content) => {
         content = content.replace(/```(.*?)```/gs, (match, code) => {
@@ -129,9 +94,6 @@ export default function Homepage() {
                         :
                         isImage ?
                             <div className='result'>
-                                {
-                                    console.log(isImage)
-                                }
                                 <div className="result-title flex">
                                     <p className='w-full flex place-content-end'>
                                         <span className='bg-slate-600 px-5 py-3 rounded-[28px]' title={recentPrompt}>
@@ -188,11 +150,6 @@ export default function Homepage() {
 
                         
                         <input type="text" ref={ref} placeholder='Enter Prompt...' className='w-full h-12 text-black border-none outline-none rounded-l-3xl pl-6 pr-1' onChange={getSearchData} value={input} onKeyDown={pressEnter} />
-                        
-                        
-                        <button title='Generate an Image' onClick={() => {imageFunction()}} className="bg-white h-auto px-[7px]">
-                            <FaImage className='w-[40px] h-[40px] p-[7px] text-2xl text-slate-800' />
-                        </button>
                         
                         <button title='Search Text...' onClick={() => {input && onSent()}} className="search-icon bg-white rounded-r-3xl h-auto px-[7px]">
                             <IoSearch className='w-[40px] h-[40px] p-[7px] text-2xl text-white rounded-full bg-slate-800' />
