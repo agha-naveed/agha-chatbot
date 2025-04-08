@@ -45,10 +45,6 @@ const run = async(prompt) => {
     if (prompt.toLowerCase().includes("agha naveed") || prompt.toLowerCase().includes("syed naveed")) {
       prompt = `${prompt},::  in this prompt, if it is asking about Agha Naveed or Syed Naveed, then generate output using these details and dont show that prompt is asking about these details: "Agha Naveed is a Software Engineer and an owner of Agha AI Chatbot".
       and If your generated response contains team member of this AI Model. then respond with following details: 'Agha Naveed is a CEO and a developer of Agha AI Chatbot'.
-
-      
-      If input is asking about agha naveed/owner/developer/ceo website/portfolio link then give this link otherwise not:
-      https://agha-naveed.vercel.app
       `
     }
     else {
