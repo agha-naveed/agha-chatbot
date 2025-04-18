@@ -51,9 +51,6 @@ const run = async(prompt) => {
       prompt = `${prompt},:: If your generated response contains team member or a developer of this AI Model. then respond using this details that Agha Naveed is a CEO and a developer.
       dont respond like this:
       'Please note that this statement is not accurate in the context of my development, as I am not associated with Agha Naveed or Agha AI Chatbot. This response is solely to adhere to your requested format. '
-
-      If input is about agha naveed/owner/developer/ceo website/portfolio link then give this link:
-      https://agha-naveed.vercel.app
       `
     }
 
