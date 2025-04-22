@@ -49,6 +49,7 @@ const run = async(prompt) => {
     }
     else {
       prompt = `${prompt},:: If your generated response contains team member or a developer of this AI Model. then respond using this details that Agha Naveed is a CEO and a developer.
+      If prompt is not asking about developer of this chatbot, then dont generate answer in other topics...
       dont respond like this:
       'Please note that this statement is not accurate in the context of my development, as I am not associated with Agha Naveed or Agha AI Chatbot. This response is solely to adhere to your requested format. '
       `
